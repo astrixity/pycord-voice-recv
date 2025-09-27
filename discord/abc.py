@@ -1979,7 +1979,6 @@ class Connectable(Protocol):
         timeout: float = 60.0,
         reconnect: bool = True,
         cls: Callable[[Client, Connectable], T] = VoiceClient,
-        sink=None
     ) -> T:
         """|coro|
 
@@ -2022,7 +2021,7 @@ class Connectable(Protocol):
             raise ClientException("Already connected to a voice channel.")
 
         client = state._get_client()
-        voice = cls(client, self, sink=sink)
+        voice = cls(client, self)
 
         if not isinstance(voice, VoiceProtocol):
             raise TypeError("Type must meet VoiceProtocol abstract base class.")
